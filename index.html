@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boyan Bonev — Мобилни Приложения</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal-600: #0F6E56;
+    --teal-500: #1D9E75;
+    --teal-400: #5DCAA5;
+    --teal-300: #9FE1CB;
+    --teal-100: #E1F5EE;
+    --bg-dark: #0a5c42;
+    --bg-card: #d4f2e7;
+    --bg-card-hover: #eafaf3;
+    --border-dark: rgba(29,158,117,0.25);
+    --border-hover: rgba(159,225,203,0.6);
+    --text-primary-dark: #f0faf6;
+    --text-secondary-dark: rgba(240,250,246,0.75);
+    --text-muted-dark: rgba(240,250,246,0.45);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-primary-dark);
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 80px; right: -180px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(93,202,165,0.18) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -120px; left: -120px;
+    width: 450px; height: 450px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(29,158,117,0.2) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* HERO — светъл */
+  .hero {
+    position: relative;
+    z-index: 1;
+    padding: 28px 24px 22px;
+    text-align: center;
+    background: linear-gradient(160deg, #d4f2e7 0%, #eafaf3 100%);
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(29,158,117,0.1);
+    color: var(--teal-600);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(29,158,117,0.2);
+    margin-bottom: 14px;
+  }
+
+  .hero-badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal-500);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 600;
+    color: var(--teal-600);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  .hero h1 span { color: var(--teal-500); }
+
+  .hero p {
+    font-size: 15px;
+    color: #3a6b57;
+    font-weight: 300;
+    max-width: 440px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* SECTION — тъмна */
+  .section {
+    position: relative;
+    z-index: 1;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal-300);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(159,225,203,0.35), transparent);
+  }
+
+  /* GRID */
+  .apps-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 580px) {
+    .apps-grid { grid-template-columns: 1fr; }
+  }
+
+  /* CARD */
+  .app-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-dark);
+    border-radius: 20px;
+    padding: 24px;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-decoration: none;
+    color: inherit;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .app-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-hover);
+    background: var(--bg-card-hover);
+  }
+
+  .app-card.coming-soon {
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .app-icon {
+    width: 60px; height: 60px;
+    border-radius: 14px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid rgba(29,158,117,0.2);
+  }
+
+  .app-icon-placeholder {
+    width: 60px; height: 60px;
+    border-radius: 14px;
+    background: rgba(200,240,226,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid rgba(200,240,226,0.25);
+  }
+
+  .app-icon-placeholder svg {
+    width: 26px; height: 26px;
+    stroke: var(--teal-300);
+  }
+
+  .app-meta { flex: 1; min-width: 0; }
+
+  .app-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #0d3d2b;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .app-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .status-live {
+    background: rgba(159,225,203,0.18);
+    color: #c8f0e2;
+    border: 1px solid rgba(159,225,203,0.3);
+  }
+
+  .status-soon {
+    background: rgba(250,199,117,0.13);
+    color: #FAC775;
+    border: 1px solid rgba(250,199,117,0.22);
+  }
+
+  .status-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .app-description {
+    font-size: 13.5px;
+    color: #3a6b57;
+    line-height: 1.7;
+    font-weight: 300;
+    flex: 1;
+  }
+
+  .card-footer {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid rgba(29,158,117,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .play-badge {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--teal-300);
+    font-weight: 400;
+  }
+
+  .play-badge svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  .arrow-btn {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: rgba(159,225,203,0.13);
+    border: 1px solid rgba(159,225,203,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--teal-300);
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    flex-shrink: 0;
+  }
+
+  .app-card:hover .arrow-btn {
+    background: var(--teal-500);
+    border-color: var(--teal-500);
+    color: #fff;
+  }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid rgba(29,158,117,0.2);
+    font-size: 13px;
+    color: var(--text-muted-dark);
+  }
+
+  footer a { color: var(--teal-300); text-decoration: none; }
+  footer a:hover { color: var(--teal-200); }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-badge">
+    <span class="hero-badge-dot"></span>
+    Android Developer
+  </div>
+  <h1>Boyan <span>Bonev</span></h1>
+  <p>Мобилни приложения с цел — да вдъхновяват, помагат и служат на хората.</p>
+</header>
+
+<main class="section">
+  <div class="section-label">Всички приложения</div>
+
+  <div class="apps-grid">
+
+    <a class="app-card" href="https://play.google.com/store/apps/details?id=com.bobo.bibleversememorizer" target="_blank" rel="noopener">
+      <div class="card-top">
+        <img class="app-icon"
+          src="https://play-lh.googleusercontent.com/sdkn9QDspc0CpAmMqez2K4XsqDcmobweLCYhBw0NUQS5RFQnMKE6HR2y881LWJy9yTVAL22SdqPMIacEDYDM=w240-h480"
+          alt="Bible Verse Memorizer">
+        <div class="app-meta">
+          <div class="app-name">Bible Verse Memorizer</div>
+          <span class="app-status status-live"><span class="status-dot"></span>В Play Store</span>
+        </div>
+      </div>
+      <p class="app-description">Научавайте и запомняйте библейски стихове лесно. Поддържа 10 езика, AI гласово търсене, напомняния и геймифицирано учене.</p>
+      <div class="card-footer">
+        <div class="play-badge">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.36.6 1.24 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z"/></svg>
+          Google Play
+        </div>
+        <div class="arrow-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="app-card" href="https://play.google.com/store/apps/details?id=com.bobo.ltvbulgaria" target="_blank" rel="noopener">
+      <div class="card-top">
+        <img class="app-icon"
+          src="https://play-lh.googleusercontent.com/IQRE-toQCzCNw53kIX0QGCzl5QKl2wz0YO-WgzM_Wea9qqmqSikgYHsJeUuLcmaKq-ZVvJ9DrSPfqnMGPFT__A=w240-h480"
+          alt="LTV България">
+        <div class="app-meta">
+          <div class="app-name">LTV България</div>
+          <span class="app-status status-live"><span class="status-dot"></span>В Play Store</span>
+        </div>
+      </div>
+      <p class="app-description">Гледайте Християнска телевизия LTV България 24/7. Живо излъчване, архив с програми, библейско училище, музика и семейни теми.</p>
+      <div class="card-footer">
+        <div class="play-badge">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.36.6 1.24 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z"/></svg>
+          Google Play
+        </div>
+        <div class="arrow-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="app-card" href="https://play.google.com/store/apps/details?id=com.bobo.pillreminderplus" target="_blank" rel="noopener">
+      <div class="card-top">
+        <div class="app-icon-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.5 3.5L3.5 10.5a4.95 4.95 0 007 7l7-7a4.95 4.95 0 00-7-7z"/>
+            <line x1="9" y1="15" x2="15" y2="9"/>
+          </svg>
+        </div>
+        <div class="app-meta">
+          <div class="app-name">Pill Reminder Plus</div>
+          <span class="app-status status-soon"><span class="status-dot"></span>Очаквайте скоро</span>
+        </div>
+      </div>
+      <p class="app-description">Умно напомняне за лекарства с персонализирани графици, проследяване на дози и удобен интерфейс за ежедневна употреба.</p>
+      <div class="card-footer">
+        <div class="play-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Скоро в Play Store
+        </div>
+        <div class="arrow-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <div class="app-card coming-soon">
+      <div class="card-top">
+        <div class="app-icon-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2"/>
+            <line x1="12" y1="18" x2="12.01" y2="18"/>
+          </svg>
+        </div>
+        <div class="app-meta">
+          <div class="app-name">Ново приложение</div>
+          <span class="app-status status-soon"><span class="status-dot"></span>В разработка</span>
+        </div>
+      </div>
+      <p class="app-description">Ново приложение е в процес на разработка. Очаквайте повече информация скоро.</p>
+      <div class="card-footer">
+        <div class="play-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Очаквайте скоро
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>© 2025 Boyan Bonev &nbsp;·&nbsp; <a href="mailto:bobooo.76@gmail.com">bobooo.76@gmail.com</a> &nbsp;·&nbsp; <a href="https://github.com/bobooo76-collab" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+</body>
+</html>
