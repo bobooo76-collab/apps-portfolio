@@ -16,14 +16,13 @@
                       radial-gradient(ellipse at 10% 80%, rgba(56,189,248,0.1) 0%, transparent 50%);
   }
 
-  /* WRAPPER */
   .page {
     max-width: 780px;
     margin: 40px auto;
     padding: 0 20px 60px;
   }
 
-  /* HERO CARD */
+  /* HERO */
   .hero {
     background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 50%, #06b6d4 100%);
     border-radius: 20px;
@@ -53,6 +52,57 @@
     background: rgba(255,255,255,0.05);
   }
 
+  /* PILL SWITCHER */
+  .lang-switcher {
+    position: absolute;
+    top: 16px; right: 16px;
+    z-index: 2;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 30px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+  }
+
+  .lang-pill-bg {
+    position: absolute;
+    top: 4px; left: 4px;
+    height: calc(100% - 8px);
+    width: calc(50% - 4px);
+    background: rgba(255,255,255,0.95);
+    border-radius: 24px;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  .lang-pill-bg.slide-right {
+    transform: translateX(100%);
+  }
+
+  .lang-btn {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    border: none;
+    border-radius: 24px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    color: rgba(255,255,255,0.75);
+    transition: color 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+  }
+
+  .lang-btn.active {
+    color: #4f46e5;
+    font-weight: 600;
+  }
+
+  /* HERO CONTENT */
   .hero-badge {
     display: inline-flex;
     align-items: center;
@@ -94,14 +144,18 @@
     font-size: 15px;
     color: rgba(255,255,255,0.88);
     font-weight: 500;
-    white-space: nowrap;
   }
 
-  @media (max-width: 500px) {
-    .hero p { white-space: normal; }
+  /* FADE — само opacity, без движение */
+  .fade-target {
+    transition: opacity 0.25s ease;
   }
 
-  /* SECTION LABEL */
+  .fade-target.fading {
+    opacity: 0;
+  }
+
+  /* SECTION */
   .section-label {
     font-size: 11px;
     font-weight: 600;
@@ -130,6 +184,7 @@
 
   @media (max-width: 540px) {
     .apps-grid { grid-template-columns: 1fr; }
+    .lang-switcher { top: 12px; right: 12px; }
   }
 
   /* CARD */
@@ -234,7 +289,6 @@
     font-size: 13px;
     color: #4b5563;
     line-height: 1.7;
-    font-weight: 400;
     flex: 1;
   }
 
@@ -275,7 +329,6 @@
     color: #fff;
   }
 
-  /* FOOTER */
   footer {
     margin-top: 40px;
     text-align: center;
@@ -290,31 +343,42 @@
 <body>
 
 <div class="page">
-
   <header class="hero">
+
+    <!-- PILL SWITCHER -->
+    <div class="lang-switcher" id="langSwitcher">
+      <div class="lang-pill-bg" id="pillBg"></div>
+      <button class="lang-btn active" id="btnBg" onclick="setLang('bg')">🇧🇬 БГ</button>
+      <button class="lang-btn" id="btnEn" onclick="setLang('en')">🇬🇧 EN</button>
+    </div>
+
     <div class="hero-badge">
       <span class="hero-dot"></span>
-      Android Developer
+      <span class="fade-target" data-bg="Android Разработчик" data-en="Android Developer">Android Разработчик</span>
     </div>
-    <h1>Boyan Bonev</h1>
-    <p>Мобилни приложения с цел — да вдъхновяват, помагат и служат на хората.</p>
+    <h1 class="fade-target" data-bg="Боян Бонев" data-en="Boyan Bonev">Боян Бонев</h1>
+    <p class="fade-target"
+       data-bg="Приложения, създадени с цел и сърце."
+       data-en="Apps built with purpose and heart.">Приложения, създадени с цел и сърце.</p>
   </header>
 
-  <div class="section-label">Всички приложения</div>
+  <div class="section-label">
+    <span class="fade-target" data-bg="Всички приложения" data-en="All Applications">Всички приложения</span>
+  </div>
 
   <div class="apps-grid">
 
     <a class="app-card" href="https://play.google.com/store/apps/details?id=com.bobo.bibleversememorizer" target="_blank" rel="noopener">
       <div class="card-top">
-        <img class="app-icon"
-          src="https://play-lh.googleusercontent.com/sdkn9QDspc0CpAmMqez2K4XsqDcmobweLCYhBw0NUQS5RFQnMKE6HR2y881LWJy9yTVAL22SdqPMIacEDYDM=w240-h480"
-          alt="Bible Verse Memorizer">
+        <img class="app-icon" src="https://play-lh.googleusercontent.com/sdkn9QDspc0CpAmMqez2K4XsqDcmobweLCYhBw0NUQS5RFQnMKE6HR2y881LWJy9yTVAL22SdqPMIacEDYDM=w240-h480" alt="Bible Verse Memorizer">
         <div class="app-meta">
           <div class="app-name">Bible Verse Memorizer</div>
-          <span class="app-status status-live"><span class="status-dot"></span>В Play Store</span>
+          <span class="app-status status-live"><span class="status-dot"></span><span class="fade-target" data-bg="В Play Store" data-en="On Play Store">В Play Store</span></span>
         </div>
       </div>
-      <p class="app-description">Научавайте и запомняйте библейски стихове лесно. Поддържа 10 езика, AI гласово търсене, напомняния и геймифицирано учене.</p>
+      <p class="app-description fade-target"
+         data-bg="Научавайте и запомняйте библейски стихове лесно. Поддържа 10 езика, AI гласово търсене, напомняния и геймифицирано учене."
+         data-en="Learn and memorize Bible verses easily. Supports 10 languages, AI voice search, reminders and gamified learning.">Научавайте и запомняйте библейски стихове лесно. Поддържа 10 езика, AI гласово търсене, напомняния и геймифицирано учене.</p>
       <div class="card-footer">
         <div class="play-badge">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.36.6 1.24 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z"/></svg>
@@ -328,15 +392,15 @@
 
     <a class="app-card" href="https://play.google.com/store/apps/details?id=com.bobo.ltvbulgaria" target="_blank" rel="noopener">
       <div class="card-top">
-        <img class="app-icon"
-          src="https://play-lh.googleusercontent.com/IQRE-toQCzCNw53kIX0QGCzl5QKl2wz0YO-WgzM_Wea9qqmqSikgYHsJeUuLcmaKq-ZVvJ9DrSPfqnMGPFT__A=w240-h480"
-          alt="LTV България">
+        <img class="app-icon" src="https://play-lh.googleusercontent.com/IQRE-toQCzCNw53kIX0QGCzl5QKl2wz0YO-WgzM_Wea9qqmqSikgYHsJeUuLcmaKq-ZVvJ9DrSPfqnMGPFT__A=w240-h480" alt="LTV България">
         <div class="app-meta">
           <div class="app-name">LTV България</div>
-          <span class="app-status status-live"><span class="status-dot"></span>В Play Store</span>
+          <span class="app-status status-live"><span class="status-dot"></span><span class="fade-target" data-bg="В Play Store" data-en="On Play Store">В Play Store</span></span>
         </div>
       </div>
-      <p class="app-description">Гледайте Християнска телевизия LTV България 24/7. Живо излъчване, архив с програми, библейско училище, музика и семейни теми.</p>
+      <p class="app-description fade-target"
+         data-bg="Гледайте Християнска телевизия LTV България 24/7. Живо излъчване, архив с програми, библейско училище, музика и семейни теми."
+         data-en="Watch Christian TV LTV Bulgaria 24/7. Live streaming, program archive, Bible school, music and family topics.">Гледайте Християнска телевизия LTV България 24/7. Живо излъчване, архив с програми, библейско училище, музика и семейни теми.</p>
       <div class="card-footer">
         <div class="play-badge">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.36.6 1.24 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z"/></svg>
@@ -358,14 +422,16 @@
         </div>
         <div class="app-meta">
           <div class="app-name">Pill Reminder Plus</div>
-          <span class="app-status status-soon"><span class="status-dot"></span>Очаквайте скоро</span>
+          <span class="app-status status-soon"><span class="status-dot"></span><span class="fade-target" data-bg="Очаквайте скоро" data-en="Coming Soon">Очаквайте скоро</span></span>
         </div>
       </div>
-      <p class="app-description">Умно напомняне за лекарства с персонализирани графици, проследяване на дози и удобен интерфейс за ежедневна употреба.</p>
+      <p class="app-description fade-target"
+         data-bg="Умно напомняне за лекарства с персонализирани графици, проследяване на дози и удобен интерфейс за ежедневна употреба."
+         data-en="Smart medication reminder with personalized schedules, dose tracking and a convenient interface for daily use.">Умно напомняне за лекарства с персонализирани графици, проследяване на дози и удобен интерфейс за ежедневна употреба.</p>
       <div class="card-footer">
         <div class="play-badge">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Скоро в Play Store
+          <span class="fade-target" data-bg="Скоро в Play Store" data-en="Coming to Play Store">Скоро в Play Store</span>
         </div>
         <div class="arrow-btn">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
@@ -382,15 +448,17 @@
           </svg>
         </div>
         <div class="app-meta">
-          <div class="app-name">Ново приложение</div>
-          <span class="app-status status-soon"><span class="status-dot"></span>В разработка</span>
+          <div class="app-name fade-target" data-bg="Ново приложение" data-en="New Application">Ново приложение</div>
+          <span class="app-status status-soon"><span class="status-dot"></span><span class="fade-target" data-bg="В разработка" data-en="In Development">В разработка</span></span>
         </div>
       </div>
-      <p class="app-description">Ново приложение е в процес на разработка. Очаквайте повече информация скоро.</p>
+      <p class="app-description fade-target"
+         data-bg="Ново приложение е в процес на разработка. Очаквайте повече информация скоро."
+         data-en="A new application is currently in development. Stay tuned for more information soon.">Ново приложение е в процес на разработка. Очаквайте повече информация скоро.</p>
       <div class="card-footer">
         <div class="play-badge">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Очаквайте скоро
+          <span class="fade-target" data-bg="Очаквайте скоро" data-en="Coming Soon">Очаквайте скоро</span>
         </div>
       </div>
     </div>
@@ -402,6 +470,40 @@
   </footer>
 
 </div>
+
+<script>
+  let currentLang = 'bg';
+
+  function setLang(lang) {
+    if (lang === currentLang) return;
+    currentLang = lang;
+
+    // Плъзни ампулката
+    const pill = document.getElementById('pillBg');
+    if (lang === 'en') {
+      pill.classList.add('slide-right');
+    } else {
+      pill.classList.remove('slide-right');
+    }
+
+    // Активен бутон
+    document.getElementById('btnBg').classList.toggle('active', lang === 'bg');
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+
+    // Лек fade на текста — само opacity
+    const targets = document.querySelectorAll('.fade-target');
+    targets.forEach(el => el.classList.add('fading'));
+
+    setTimeout(() => {
+      targets.forEach(el => {
+        const text = el.getAttribute('data-' + lang);
+        if (text) el.textContent = text;
+        el.classList.remove('fading');
+      });
+      document.documentElement.lang = lang === 'bg' ? 'bg' : 'en';
+    }, 250);
+  }
+</script>
 
 </body>
 </html>
