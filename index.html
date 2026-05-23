@@ -4,176 +4,159 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Boyan Bonev — Мобилни Приложения</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --teal-600: #0F6E56;
-    --teal-500: #1D9E75;
-    --teal-400: #5DCAA5;
-    --teal-300: #9FE1CB;
-    --teal-100: #E1F5EE;
-    --bg-dark: #0a5c42;
-    --bg-card: #d4f2e7;
-    --bg-card-hover: #eafaf3;
-    --border-dark: rgba(29,158,117,0.25);
-    --border-hover: rgba(159,225,203,0.6);
-    --text-primary-dark: #f0faf6;
-    --text-secondary-dark: rgba(240,250,246,0.75);
-    --text-muted-dark: rgba(240,250,246,0.45);
-  }
-
   body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg-dark);
-    color: var(--text-primary-dark);
+    font-family: 'Inter', sans-serif;
+    background: #f0f4ff;
     min-height: 100vh;
+    background-image: radial-gradient(ellipse at 80% 20%, rgba(99,130,255,0.12) 0%, transparent 60%),
+                      radial-gradient(ellipse at 10% 80%, rgba(56,189,248,0.1) 0%, transparent 50%);
   }
 
-  body::before {
-    content: '';
-    position: fixed;
-    top: 80px; right: -180px;
-    width: 500px; height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(93,202,165,0.18) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
+  /* WRAPPER */
+  .page {
+    max-width: 780px;
+    margin: 40px auto;
+    padding: 0 20px 60px;
   }
 
-  body::after {
-    content: '';
-    position: fixed;
-    bottom: -120px; left: -120px;
-    width: 450px; height: 450px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(29,158,117,0.2) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* HERO — светъл */
+  /* HERO CARD */
   .hero {
-    position: relative;
-    z-index: 1;
-    padding: 28px 24px 22px;
+    background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 50%, #06b6d4 100%);
+    border-radius: 20px;
+    padding: 44px 32px 40px;
     text-align: center;
-    background: linear-gradient(160deg, #d4f2e7 0%, #eafaf3 100%);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(79,70,229,0.35);
+    margin-bottom: 32px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
   }
 
   .hero-badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: rgba(29,158,117,0.1);
-    color: var(--teal-600);
+    gap: 7px;
+    background: rgba(255,255,255,0.18);
+    color: #fff;
     font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     padding: 5px 16px;
     border-radius: 20px;
-    border: 1px solid rgba(29,158,117,0.2);
-    margin-bottom: 14px;
+    border: 1px solid rgba(255,255,255,0.3);
+    margin-bottom: 18px;
   }
 
-  .hero-badge-dot {
+  .hero-dot {
     width: 6px; height: 6px;
     border-radius: 50%;
-    background: var(--teal-500);
+    background: #a5f3fc;
     animation: pulse 2s ease-in-out infinite;
   }
 
   @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
   }
 
   .hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 5vw, 42px);
+    font-size: clamp(30px, 5vw, 46px);
     font-weight: 600;
-    color: var(--teal-600);
-    line-height: 1.15;
-    margin-bottom: 10px;
+    color: #fff;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.15);
   }
-
-  .hero h1 span { color: var(--teal-500); }
 
   .hero p {
     font-size: 15px;
-    color: #3a6b57;
-    font-weight: 300;
-    max-width: 440px;
-    margin: 0 auto;
-    line-height: 1.7;
+    color: rgba(255,255,255,0.88);
+    font-weight: 500;
+    white-space: nowrap;
   }
 
-  /* SECTION — тъмна */
-  .section {
-    position: relative;
-    z-index: 1;
-    max-width: 880px;
-    margin: 0 auto;
-    padding: 48px 24px 80px;
+  @media (max-width: 500px) {
+    .hero p { white-space: normal; }
   }
 
+  /* SECTION LABEL */
   .section-label {
     font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
+    font-weight: 600;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--teal-300);
-    margin-bottom: 28px;
+    color: #6366f1;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
   }
 
   .section-label::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, rgba(159,225,203,0.35), transparent);
+    background: linear-gradient(90deg, #c7d2fe, transparent);
   }
 
   /* GRID */
   .apps-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 18px;
   }
 
-  @media (max-width: 580px) {
+  @media (max-width: 540px) {
     .apps-grid { grid-template-columns: 1fr; }
   }
 
   /* CARD */
   .app-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-dark);
-    border-radius: 20px;
-    padding: 24px;
-    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    background: #ffffff;
+    border: 1px solid #e0e7ff;
+    border-radius: 18px;
+    padding: 22px;
     display: flex;
     flex-direction: column;
     gap: 14px;
     text-decoration: none;
     color: inherit;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    box-shadow: 0 4px 16px rgba(99,102,241,0.07);
   }
 
   .app-card:hover {
     transform: translateY(-4px);
-    border-color: var(--border-hover);
-    background: var(--bg-card-hover);
+    box-shadow: 0 16px 40px rgba(99,102,241,0.16);
+    border-color: #a5b4fc;
   }
 
   .app-card.coming-soon {
-    opacity: 0.55;
+    opacity: 0.6;
     pointer-events: none;
+    background: #f8f9ff;
   }
 
   .card-top {
@@ -183,36 +166,36 @@
   }
 
   .app-icon {
-    width: 60px; height: 60px;
+    width: 58px; height: 58px;
     border-radius: 14px;
     object-fit: cover;
     flex-shrink: 0;
-    border: 1px solid rgba(29,158,117,0.2);
+    border: 1px solid #e0e7ff;
+    box-shadow: 0 4px 12px rgba(99,102,241,0.1);
   }
 
   .app-icon-placeholder {
-    width: 60px; height: 60px;
+    width: 58px; height: 58px;
     border-radius: 14px;
-    background: rgba(200,240,226,0.15);
+    background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    border: 1px solid rgba(200,240,226,0.25);
+    border: 1px solid #c7d2fe;
   }
 
   .app-icon-placeholder svg {
-    width: 26px; height: 26px;
-    stroke: var(--teal-300);
+    width: 24px; height: 24px;
+    stroke: #6366f1;
   }
 
   .app-meta { flex: 1; min-width: 0; }
 
   .app-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 17px;
-    font-weight: 600;
-    color: #0d3d2b;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e1b4b;
     line-height: 1.3;
     margin-bottom: 6px;
   }
@@ -222,23 +205,23 @@
     align-items: center;
     gap: 5px;
     font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.07em;
+    font-weight: 600;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     padding: 3px 10px;
     border-radius: 20px;
   }
 
   .status-live {
-    background: rgba(159,225,203,0.18);
-    color: #c8f0e2;
-    border: 1px solid rgba(159,225,203,0.3);
+    background: #dbeafe;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
   }
 
   .status-soon {
-    background: rgba(250,199,117,0.13);
-    color: #FAC775;
-    border: 1px solid rgba(250,199,117,0.22);
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
   }
 
   .status-dot {
@@ -248,17 +231,17 @@
   }
 
   .app-description {
-    font-size: 13.5px;
-    color: #3a6b57;
+    font-size: 13px;
+    color: #4b5563;
     line-height: 1.7;
-    font-weight: 300;
+    font-weight: 400;
     flex: 1;
   }
 
   .card-footer {
     margin-top: auto;
     padding-top: 12px;
-    border-top: 1px solid rgba(29,158,117,0.2);
+    border-top: 1px solid #e0e7ff;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -267,60 +250,56 @@
   .play-badge {
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 6px;
     font-size: 12px;
-    color: var(--teal-300);
-    font-weight: 400;
+    color: #6366f1;
+    font-weight: 500;
   }
 
-  .play-badge svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .play-badge svg { width: 13px; height: 13px; flex-shrink: 0; }
 
   .arrow-btn {
     width: 30px; height: 30px;
     border-radius: 50%;
-    background: rgba(159,225,203,0.13);
-    border: 1px solid rgba(159,225,203,0.25);
+    background: #e0e7ff;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--teal-300);
-    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    color: #6366f1;
+    transition: background 0.2s, color 0.2s;
     flex-shrink: 0;
   }
 
   .app-card:hover .arrow-btn {
-    background: var(--teal-500);
-    border-color: var(--teal-500);
+    background: #6366f1;
     color: #fff;
   }
 
   /* FOOTER */
   footer {
-    position: relative;
-    z-index: 1;
+    margin-top: 40px;
     text-align: center;
-    padding: 32px 24px;
-    border-top: 1px solid rgba(29,158,117,0.2);
     font-size: 13px;
-    color: var(--text-muted-dark);
+    color: #9ca3af;
   }
 
-  footer a { color: var(--teal-300); text-decoration: none; }
-  footer a:hover { color: var(--teal-200); }
+  footer a { color: #6366f1; text-decoration: none; }
+  footer a:hover { color: #4f46e5; }
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="hero-badge">
-    <span class="hero-badge-dot"></span>
-    Android Developer
-  </div>
-  <h1>Boyan <span>Bonev</span></h1>
-  <p>Мобилни приложения с цел — да вдъхновяват, помагат и служат на хората.</p>
-</header>
+<div class="page">
 
-<main class="section">
+  <header class="hero">
+    <div class="hero-badge">
+      <span class="hero-dot"></span>
+      Android Developer
+    </div>
+    <h1>Boyan Bonev</h1>
+    <p>Мобилни приложения с цел — да вдъхновяват, помагат и служат на хората.</p>
+  </header>
+
   <div class="section-label">Всички приложения</div>
 
   <div class="apps-grid">
@@ -417,11 +396,12 @@
     </div>
 
   </div>
-</main>
 
-<footer>
-  <p>© 2025 Boyan Bonev &nbsp;·&nbsp; <a href="https://github.com/bobooo76-collab" target="_blank" rel="noopener">GitHub</a></p>
-</footer>
+  <footer>
+    <p>© 2025 Boyan Bonev &nbsp;·&nbsp; <a href="https://github.com/bobooo76-collab" target="_blank" rel="noopener">GitHub</a></p>
+  </footer>
+
+</div>
 
 </body>
 </html>
